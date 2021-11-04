@@ -1,4 +1,10 @@
 const [{ Server: h1 }, x] = [require('http'), require('express')];
+const moment = require('moment');
+
+const ApiRouter = require('./routes/api');
+
+
+const bodyParser = require('body-parser');
 
 const Router = x.Router();
 const PORT = 4321;
@@ -13,7 +19,12 @@ app
   .use(mw0)
   .use(function workingSetter(req, res, next) {req.working = 'Работает, ура!'; next();})
   .use(x.static('.'))
+
+  .use(bodyParser.urlencoded({ extended: true }))
+  .use(bodyParser.json())
+  
   .use('/', Router)
+  .use('/api', ApiRouter(x))
   .get('/first', (req, res, next) => {
     req.app._router.stack.forEach(mw => console.log(mw.name))
     if (req.query.error == 'yes') return next();   

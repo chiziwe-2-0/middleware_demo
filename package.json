@@ -7,15 +7,16 @@
   "author": "",
   "license": "ISC",
   "scripts": {
-    "start":"node index.js"
+    "start": "node index.js"
   },
   "engines": {
-    "node":"14.5.0"
+    "node": "14.5.0"
   },
   "dependencies": {
     "express": "^4.17.1"
   },
   "devDependencies": {
+    "moment": "^2.29.1",
     "nodemon": "^2.0.4"
   }
 }
